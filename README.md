@@ -30,3 +30,7 @@ Use `python train_supervised.py --help` and each tool's `--help` for further opt
 The paper-facing dataset and evaluation procedure is described in [REPRODUCIBILITY.md](REPRODUCIBILITY.md). In particular, evaluate the reconstruction-aware detector at batch size 1 because its Fourier-processed input uses batch-wide extrema; batch size 1 makes each image's prediction independent of the other images in its batch. The released analysis tools require an explicit checkpoint-protocol label and record the checkpoint SHA-256 digest, rather than inferring the training source from a filename.
 
 Pretrained detector weights are not yet included in this code commit. They must be matched to the final source-domain experiment and published separately before the repository can satisfy a code-**and**-weights release requirement. Do not label a checkpoint as SDV5-trained solely because of its folder name or an evaluation table.
+
+## Attribution
+
+`core/models/fire_official.py` integrates and extends the [FIRE implementation](https://github.com/Chuchad/FIRE), which is MIT-licensed; its original author copyright notice is preserved in `LICENSE`. The SPAI runner is an adapter for the [official SPAI project](https://github.com/mever-team/spai), not a redistribution of SPAI model code or weights. Obtain other external implementations and pretrained components from their respective authors under their own licenses.
