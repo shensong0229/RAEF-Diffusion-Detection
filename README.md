@@ -19,13 +19,13 @@ Install a CUDA-compatible PyTorch build and the packages in `requirements.txt`. 
 
 Training and evaluation use a CSV index with columns `path`, `label`, and `domain`; `split` is optional. Image paths should resolve relative to the supplied data root or be absolute. Keep training, validation, and unseen-generator test indexes separate. Example configurations contain local checkpoint paths that must be replaced for a new environment.
 
-From the repository root, the main training command has the form:
+From the repository root, a training command has the form:
 
 ```powershell
 python train_supervised.py --config configs/sfire_crossattn_resnet50.yaml --data_root <image-root> --index_csv <train-validation-index.csv> --spatial_ckpt <spatial-checkpoint> --fire_ckpt <reconstruction-checkpoint> --run_name <run-name>
 ```
 
-Use `python train_supervised.py --help` and each tool's `--help` for further options. Source indexes, initialization checkpoints, and evaluation bundles establish the exact experimental protocol; a configuration filename alone does not. Match any reported paper result to the corresponding run log and prediction files before release.
+This command demonstrates the interface; it is not a claim that the named configuration reproduces Table 2. Some `sfire_crossattn_resnet50*.yaml` files document earlier ADM-initialized runs, while the `paper_sdv5_*.yaml` files are SDV5-oriented examples. The exact protocol of a reported result requires its source-index hash, initialization-checkpoint hashes, full configuration, training log, and predictions. Match these records before treating an example as the final cloud experiment. Use `python train_supervised.py --help` and each tool's `--help` for further options.
 
 The paper-facing dataset and evaluation procedure is described in [REPRODUCIBILITY.md](REPRODUCIBILITY.md). In particular, evaluate the reconstruction-aware detector at batch size 1 because its Fourier-processed input uses batch-wide extrema; batch size 1 makes each image's prediction independent of the other images in its batch. The released analysis tools require an explicit checkpoint-protocol label and record the checkpoint SHA-256 digest, rather than inferring the training source from a filename.
 
