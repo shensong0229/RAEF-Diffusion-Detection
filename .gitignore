@@ -216,3 +216,43 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# Publication allowlist: retain code and example configuration only.
+/*
+!/.gitignore
+!/LICENSE
+!/README.md
+!/REPRODUCIBILITY.md
+!/requirements.txt
+!/train_supervised.py
+!/core/
+!/configs/
+!/tools/
+!/external_baselines/
+/external_baselines/*
+!/external_baselines/reviewer3_runner/
+/external_baselines/reviewer3_runner/*.ps1
+
+# Exclude outputs that could be created inside a source directory.
+*.csv
+*.tsv
+*.json
+*.jsonl
+*.png
+*.jpg
+*.jpeg
+*.pdf
+*.docx
+*.pth
+*.pt
+*.ckpt
+*.safetensors
+*.bin
+*.npy
+*.npz
+*.pkl
+*.zip
+*.tar
+*.gz
+*.7z
+.env.*

@@ -1,0 +1,35 @@
+seed: 42
+image_size: 256
+epochs: 100
+batch_size: 2
+grad_accum_steps: 8
+num_workers: 4
+amp: true
+
+model:
+  name: fire_resnet50
+  # Match the original FIRE branch run: trainable detector weights are not
+  # initialized from an ADM-trained detector checkpoint.
+  pretrained: false
+  dropout: 0.0
+
+optim:
+  lr: 1.0e-4
+  weight_decay: 0.0
+  grad_clip: 1.0
+
+sched:
+  warmup_epochs: 0
+  min_lr: 1.0e-6
+
+dualstream:
+  save_freq: 0
+
+data:
+  missing_policy: strict
+  preflight_sample_count: 1000
+  preflight_min_ok_ratio: 1.0
+
+runtime:
+  disable_vae_slicing: false
+  disable_vae_tiling: false

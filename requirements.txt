@@ -1,0 +1,15 @@
+# Core training and analysis dependencies; install a CUDA-compatible PyTorch build.
+torch
+torchvision
+numpy
+pandas
+Pillow
+PyYAML
+timm
+diffusers
+scikit-learn
+scipy
+matplotlib
+tqdm
+tensorboard
+python-docx

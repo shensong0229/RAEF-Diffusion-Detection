@@ -1,0 +1,20 @@
+seed: 42
+image_size: 256
+epochs: 12
+batch_size: 8
+num_workers: 0
+amp: false
+
+model:
+  name: sr_gate_resnet50
+  pretrained: true
+  dropout: 0.2
+
+optim:
+  lr: 3.0e-5
+  weight_decay: 1.0e-4
+  grad_clip: 1.0
+
+sched:
+  warmup_epochs: 1
+  min_lr: 1.0e-6

@@ -1,0 +1,43 @@
+seed: 42
+image_size: 256
+epochs: 18
+batch_size: 8
+grad_accum_steps: 1
+num_workers: 0
+amp: false
+
+model:
+  name: sfire_crossattn_resnet50
+  pretrained: false
+  dropout: 0.10
+
+optim:
+  lr: 1.0e-4
+  weight_decay: 1.0e-4
+  grad_clip: 1.0
+
+sched:
+  warmup_epochs: 1
+  min_lr: 1.0e-6
+
+dualstream:
+  # 直接用你现有两个单分支 best checkpoint 初始化，而不是从头训练。
+  spatial_ckpt: .\checkpoints\run_spatial_imagenet_adm_256\best_by_auc.pth
+  fire_ckpt: .\checkpoints\run_fire_imagenet_adm_a30_std_fg\best_by_auc.pth
+
+  # 前几轮先冻结两个分支 backbone，只训练融合/路由/最终头，后面再联合微调。
+  freeze_backbones_epochs: 2
+
+  # 断点与阶段保存
+  save_freq: 1
+
+  # 多损失权重
+  aux_spatial_weight: 0.30
+  aux_fire_weight: 0.30
+  contrastive_weight: 0.05
+  contrastive_temp: 0.07
+  router_balance_weight: 0.02
+  router_entropy_weight: 0.005
+
+  # 分支加载是否严格对齐。第一次建议 false，等跑通再考虑 true。
+  branch_init_strict: false
